@@ -13,6 +13,13 @@ core packages to the detected version.
 Hot-pluggable: mounted via `dsh plugin --profile <name> add link:<path>`, no
 DSH source changes required.
 
+## Screenshot
+
+The sidebar "DSH 版本" panel in the dsh web GUI: local vs. latest version
+cards, the status badge, and the Check/Update actions.
+
+![dsh-version panel in the dsh web GUI](assets/version-panel.png)
+
 ## Features
 
 - **Local version**: probed from the runtime tree the GUI actually runs

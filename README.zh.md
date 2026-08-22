@@ -11,6 +11,13 @@ profile 中的核心三件（dsh / dsh-base / dsh-web-app）升到检测到的�
 热插拔安装——通过 `dsh plugin --profile <name> add link:<路径>` 挂载，
 不改 dsh 源码。
 
+## 界面截图
+
+dsh web GUI 侧边栏的「DSH 版本」面板：本地与最新版本卡片、状态徽章，
+以及「立即检查 / 更新」操作。
+
+![dsh web GUI 中的 dsh-version 面板](assets/version-panel.png)
+
 ## 功能
 
 - **本地版本**：从 GUI 实际运行的依赖树（profile npm 安装）探测，保证数字
