@@ -59,7 +59,7 @@ pnpm ≥ 10 默认拒绝执行 git 依赖的 `prepare` 脚本，需要先授权�
 ```yaml
 # <profile>/pnpm-workspace.yaml
 allowBuilds:
-  '@linxin666/dsh-version': true
+  '@mrwinchester/dsh-version': true
 ```
 
 ```sh
@@ -155,9 +155,19 @@ cordis.patch.yml        把插件行插入 profile 的 bundle 补丁
 
 ### 包名与改名
 
-安装身份是 `@linxin666/dsh-version`。改名必须同步三处：`src/index.ts`
-（`PLUGIN_PACKAGE`）、`cordis.patch.yml`（插件行）、`tsdown.config.ts`
-（`clientBundle` 的 id）。
+安装身份是 `@mrwinchester/dsh-version`（npm scope 强制小写，GitHub 用户名
+`MrWinchester` 与包名相互独立）。包名是安装身份，散布在多个文件中——改名
+必须**全量**同步，缺一处就会让 profile 依赖与插件张挂失配：
+
+- `package.json` → `name`
+- `src/index.ts` → `PLUGIN_PACKAGE` 常量与 `mountOnce` 的包名实参
+- `cordis.patch.yml` → 插件行 `name`
+- `tsdown.config.ts` → `clientBundle` 第一个参数（id 会打进
+  `__ModuleLoader__.load` 与注入的 style 标签）
+- `tests/versions.test.ts` → fixture 依赖名（含用作对照的包名）
+- 本文件、`README.md`、`AGENTS.md` → 安装身份与 `allowBuilds` key
+
+改名后需在已挂载 profile 中重装（先 `remove` 旧包名，再 `add` 新包名）。
 
 ## License
 

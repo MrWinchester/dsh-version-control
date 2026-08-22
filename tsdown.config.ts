@@ -10,7 +10,7 @@
  */
 import { clientBundle } from './shared/tsdown.client.ts'
 
-export default clientBundle('@linxin666/dsh-version', ['src/index.ts', 'src/invariant.ts'], {
+export default clientBundle('@mrwinchester/dsh-version', ['src/index.ts', 'src/invariant.ts'], {
   libExternal: [
     '@deepseek-ai/dsh-client-locale',
     '@deepseek-ai/dsh-client-runtime',

@@ -65,7 +65,7 @@ exact key it prints into the profile's `pnpm-workspace.yaml`, then re-run the
 ```yaml
 # <profile>/pnpm-workspace.yaml
 allowBuilds:
-  '@linxin666/dsh-version': true
+  '@mrwinchester/dsh-version': true
 ```
 
 ```sh
@@ -168,9 +168,22 @@ cordis.patch.yml        bundle patch inserting the plugin row into the profile
 
 ### Package identity
 
-Install identity is `@linxin666/dsh-version`. Renaming requires syncing three
-places: `src/index.ts` (`PLUGIN_PACKAGE`), `cordis.patch.yml` (the plugin row),
-and `tsdown.config.ts` (the `clientBundle` id).
+Install identity is `@mrwinchester/dsh-version` (npm scopes are lowercase;
+the GitHub username `MrWinchester` and the package scope are independent).
+The package name is the install identity and appears in several files — when
+renaming, update **all** of them or the profile dependency and plugin
+registration will disagree:
+
+- `package.json` → `name`
+- `src/index.ts` → `PLUGIN_PACKAGE` and the `mountOnce` argument
+- `cordis.patch.yml` → the plugin row `name`
+- `tsdown.config.ts` → the first `clientBundle` argument (the id is stamped
+  into `__ModuleLoader__.load` and the injected style tags)
+- `tests/versions.test.ts` → fixture dependency names (incl. the counter-package)
+- this file, `README.zh.md`, and `AGENTS.md` → install identity / `allowBuilds` keys
+
+After renaming, reinstall into any mounted profile (`remove` the old name,
+then `add` the new one).
 
 ## License
 

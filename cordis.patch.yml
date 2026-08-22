@@ -10,4 +10,4 @@
 # /plugins/<id>/client.js) load in the web GUI.
 - insert:
     - id: dsh-version
-      name: '@linxin666/dsh-version'
+      name: '@mrwinchester/dsh-version'

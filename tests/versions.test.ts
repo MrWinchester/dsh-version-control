@@ -43,12 +43,12 @@ describe('findProfileDir', () => {
       name: 'dsh-profile-web',
       dsh: { profile: { bundles: [] } },
     },
-    '/Users/u/.dsh/profiles/web/node_modules/@linxin666/dsh-version/lib/index.js': undefined,
+    '/Users/u/.dsh/profiles/web/node_modules/@mrwinchester/dsh-version/lib/index.js': undefined,
   }
   const readJson = (path: string): unknown | undefined => manifests[path]
 
   it('walks up from a module file to the profile root', () => {
-    expect(findProfileDir('/Users/u/.dsh/profiles/web/node_modules/@linxin666/dsh-version/lib/index.js', readJson))
+    expect(findProfileDir('/Users/u/.dsh/profiles/web/node_modules/@mrwinchester/dsh-version/lib/index.js', readJson))
       .toBe('/Users/u/.dsh/profiles/web')
   })
 
@@ -60,13 +60,13 @@ describe('findProfileDir', () => {
 describe('findProfilesByDependency', () => {
   const manifests: Record<string, unknown> = {
     '/Users/u/.dsh/profiles/web/package.json': {
-      dependencies: { '@linxin666/dsh-version': 'link:/path/to/dsh-version-control' },
+      dependencies: { '@mrwinchester/dsh-version': 'link:/path/to/dsh-version-control' },
     },
     '/Users/u/.dsh/profiles/lite/package.json': {
       dependencies: { '@deepseek-ai/dsh': '0.1.0-rc.6' },
     },
     '/Users/u/.dsh/profiles/headless/package.json': {
-      dependencies: { '@linxin666/dsh-version': 'link:...' },
+      dependencies: { '@mrwinchester/dsh-version': 'link:...' },
     },
   }
   const readJson = (path: string): unknown | undefined => manifests[path]
@@ -74,12 +74,12 @@ describe('findProfilesByDependency', () => {
     root === '/Users/u/.dsh/profiles' ? ['web', 'lite', 'headless', '.tmp'] : []
 
   it('returns every profile that depends on the plugin', () => {
-    expect(findProfilesByDependency('/Users/u/.dsh/profiles', '@linxin666/dsh-version', readJson, listDirs))
+    expect(findProfilesByDependency('/Users/u/.dsh/profiles', '@mrwinchester/dsh-version', readJson, listDirs))
       .toEqual(['/Users/u/.dsh/profiles/web', '/Users/u/.dsh/profiles/headless'])
   })
 
   it('returns an empty list when the plugin is not installed anywhere', () => {
-    expect(findProfilesByDependency('/Users/u/.dsh/profiles', '@linxin666/dsh-ssh', readJson, listDirs)).toEqual([])
+    expect(findProfilesByDependency('/Users/u/.dsh/profiles', '@mrwinchester/dsh-ssh', readJson, listDirs)).toEqual([])
   })
 })
 

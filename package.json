@@ -1,5 +1,5 @@
 {
-  "name": "@linxin666/dsh-version",
+  "name": "@mrwinchester/dsh-version",
   "description": "DSH version inspector for the dsh web GUI: shows the running client's dsh / dsh-base / dsh-web-app / web-ui-all versions, polls the npm registry for the latest release on a configurable schedule (default 3h), and offers a one-click update that upgrades the profile's core packages to the latest tag (restart the web app afterwards). Hot-pluggable — mounted via `dsh plugin --profile <name> add link:<path>`, no dsh source changes.",
   "version": "0.2.0",
   "type": "module",

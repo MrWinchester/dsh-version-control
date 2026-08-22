@@ -48,10 +48,19 @@ dsh-web-app 核心三件升到检测到的最新版本。
 
 ## 包名与改名
 
-安装身份是 `@linxin666/dsh-version`。改名必须同步三处：`src/index.ts` 的
-`PLUGIN_PACKAGE`、`cordis.patch.yml` 的插件行、`tsdown.config.ts` 的
-`clientBundle` 第一个参数（client bundle id 会打进 `__ModuleLoader__.load`
-与 style 标签）。
+安装身份是 `@mrwinchester/dsh-version`（npm scope 强制小写，GitHub 用户名
+MrWinchester 与包名独立）。包名散布在多个文件中——改名必须全量同步，缺一
+处就会让 profile 依赖与插件张挂失配：
+
+- `package.json` 的 `name`
+- `src/index.ts`：`PLUGIN_PACKAGE` 常量与 `mountOnce` 的包名实参
+- `cordis.patch.yml` 的插件行 `name`
+- `tsdown.config.ts` 的 `clientBundle` 第一个参数（id 会打进
+  `__ModuleLoader__.load` 与 style 标签）
+- `tests/versions.test.ts` 的 fixture 依赖名（含对照包名）
+- 本文件与两份 README 中的安装身份 / `allowBuilds` key
+
+改名后需在已挂载 profile 中重装（`remove` 旧包名 + `add` 新包名）。
 
 ## 提交前检查
 
