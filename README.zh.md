@@ -1,5 +1,7 @@
 # dsh-version
 
+**[English](README.md) | [中文](README.zh.md)**
+
 DSH（DeepSeek Harness）Web GUI 的版本查看与更新插件：侧边栏面板展示两个数字
 ——**本地 DSH 版本**（当前客户端实际运行的 `@deepseek-ai/dsh` 核心）与
 **最新发布版本**（以 GitHub Releases 为准，npm dist-tags 兜底），按可配置

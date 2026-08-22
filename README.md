@@ -1,5 +1,7 @@
 # dsh-version
 
+**[English](README.md) | [中文](README.zh.md)**
+
 A DSH (DeepSeek Harness) Web GUI plugin that inspects and updates the installed
 DSH core. The sidebar panel shows exactly two numbers — the **local DSH
 version** (the `@deepseek-ai/dsh` core the running client actually uses) and
