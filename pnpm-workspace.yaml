@@ -1,0 +1,13 @@
+# pnpm-workspace.yaml
+#
+# pnpm ≥ 10 runs `pnpm install` inside a git-hosted package before its
+# `prepare` script (this package's build). That inner install executes with
+# the package directory as its own workspace root and does not inherit the
+# installing profile's allowBuilds, so without this file every git install of
+# this plugin would fail with [ERR_PNPM_IGNORED_BUILDS] on esbuild@0.28.2
+# (a tsdown dependency) while `strictDepBuilds` is on.
+#
+# Declaring the authorization here makes source installs work out of the box:
+#   dsh plugin --profile web add github:MrWinchester/dsh-version-control
+allowBuilds:
+  esbuild: true
