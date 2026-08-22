@@ -45,8 +45,37 @@ dsh web GUI 侧边栏的「DSH 版本」面板：本地与最新版本卡片、�
 
 ## 安装
 
+**从 GitHub 安装（推荐给其他人使用）。** git 安装拉取源码，并在包内运行
+自包含的 `prepare` 构建（tsdown）——仓库不发布预构建产物：
+
 ```sh
-# 在能访问本源码树的本机任意目录执行
+dsh plugin --profile web add github:MrWinchester/dsh-version-control
+```
+
+pnpm ≥ 10 默认拒绝执行 git 依赖的 `prepare` 脚本，需要先授权。第一次 `add`
+会打印本包的构建授权 key——把它原样复制到该 profile 的
+`pnpm-workspace.yaml`，然后重新执行 `add`：
+
+```yaml
+# <profile>/pnpm-workspace.yaml
+allowBuilds:
+  '@linxin666/dsh-version': true
+```
+
+```sh
+dsh plugin --profile web add github:MrWinchester/dsh-version-control
+# 重启 dsh web 加载插件
+```
+
+需要可复现的安装时可钉死提交：
+
+```sh
+dsh plugin --profile web add 'github:MrWinchester/dsh-version-control#<完整-sha>'
+```
+
+**本地源码 link（开发用）。** 直接挂载检出目录：
+
+```sh
 dsh plugin --profile web add link:/path/to/dsh-version-control
 # 重启 dsh web 加载插件
 ```

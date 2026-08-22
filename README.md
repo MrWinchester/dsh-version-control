@@ -49,8 +49,39 @@ cards, the status badge, and the Check/Update actions.
 
 ## Install
 
+**From GitHub (recommended for everyone else).** The git install fetches the
+source and runs the package's self-contained `prepare` build (tsdown), so no
+prebuilt artifacts are shipped:
+
 ```sh
-# from anywhere on the machine that can reach this source tree
+dsh plugin --profile web add github:MrWinchester/dsh-version-control
+```
+
+pnpm ≥ 10 refuses to run a git dependency's `prepare` script until authorized.
+The first `add` prints the build-authorization key for this package — copy the
+exact key it prints into the profile's `pnpm-workspace.yaml`, then re-run the
+`add` command:
+
+```yaml
+# <profile>/pnpm-workspace.yaml
+allowBuilds:
+  '@linxin666/dsh-version': true
+```
+
+```sh
+dsh plugin --profile web add github:MrWinchester/dsh-version-control
+# restart dsh web to load the plugin
+```
+
+For reproducible installs, pin the commit:
+
+```sh
+dsh plugin --profile web add 'github:MrWinchester/dsh-version-control#<full-sha>'
+```
+
+**Local source link (for development).** Mount the checkout directly:
+
+```sh
 dsh plugin --profile web add link:/path/to/dsh-version-control
 # restart dsh web to load the plugin
 ```

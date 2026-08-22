@@ -33,6 +33,19 @@ dsh-web-app 核心三件升到检测到的最新版本。
   （`https://registry.npmjs.org/`），镜像源会漏掉新发布的 rc。输出不流入面板
   （面板只展示成败结果）。
 
+## 发布与安装契约
+
+- git 安装（`dsh plugin add github:MrWinchester/dsh-version-control`）分发
+  的是**源码**不是构建产物，`prepare` 脚本（`tsdown`）在安装时自包含构建：
+  不得依赖仓库外路径（`shared/` 与此仓库同在），devDependencies 由 pnpm
+  安装。改动构建链路时必须保证 `prepare` 依然只靠本仓库 + devDependencies
+  即可产出 `lib/index.js` 与 `lib/client.js`。
+- `prepare` 刻意不做类型检查（tsdown 转译），因此 git 安装出的 `lib/` 不含
+  d.ts；完整类型（`lib/types`）只在 npm 发布（`pnpm build` = tsc 声明 +
+  tsdown）时产出。
+- pnpm ≥ 10 需用户先在 profile 的 `pnpm-workspace.yaml` 里 `allowBuilds`
+  授权后才执行 git 依赖的 `prepare`；README 已写明该流程，勿在文档中省略。
+
 ## 包名与改名
 
 安装身份是 `@linxin666/dsh-version`。改名必须同步三处：`src/index.ts` 的
