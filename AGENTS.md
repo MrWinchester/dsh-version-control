@@ -45,6 +45,11 @@ dsh-web-app 核心三件升到检测到的最新版本。
   tsdown）时产出。
 - pnpm ≥ 10 需用户先在 profile 的 `pnpm-workspace.yaml` 里 `allowBuilds`
   授权后才执行 git 依赖的 `prepare`；README 已写明该流程，勿在文档中省略。
+- 本仓库根自带 `pnpm-workspace.yaml`（`allowBuilds: esbuild`）：pnpm 对
+  git-hosted 包在跑 `prepare` 前会先在其包目录内执行一次隔离的
+  `pnpm install`（该目录即工作区根，不继承安装方 profile 的 allowBuilds，
+  `strictDepBuilds` 下会因 esbuild 构建脚本被忽略而失败）。此文件是源码
+  安装开箱即用的前提，勿删除。
 
 ## 包名与改名
 
